@@ -11,7 +11,7 @@ enum EyeType
 class Eye
 {
     var eyeType: EyeType = EyeType.Monocular
-    var eyeView: GLKMatrix4 = GLKMatrix4Identity;
+    var eyeView: GLKMatrix4 = GLKMatrix4Identity
     
     var viewport:Viewport = Viewport()
     var fov:FieldOfView = FieldOfView(left: 0, right: 0, bottom: 0, top: 0)
@@ -19,9 +19,9 @@ class Eye
     var lastZNear:Float = 0
     var lastZFar: Float = 0
     
-    var projectionChanged: Bool = true;
+    var projectionChanged: Bool = true
     
-    var perspective:GLKMatrix4 = GLKMatrix4Identity;
+    var perspective:GLKMatrix4 = GLKMatrix4Identity
     
     init(type:EyeType)
     {
@@ -30,17 +30,17 @@ class Eye
     
     func calculatePerspective(near:Float, _ far:Float) -> GLKMatrix4
     {
-        if (!projectionChanged && lastZNear == near && lastZFar == far)
+        if !projectionChanged && lastZNear == near && lastZFar == far
         {
-            return perspective;
+            return perspective
         }
 
         perspective = fov.toPerspectiveMatrix(zNear: lastZNear, zFar: lastZFar)
         
-        lastZNear = near;
-        lastZFar = far;
+        lastZNear = near
+        lastZFar = far
         
-        projectionChanged = false;
+        projectionChanged = false
         
         return perspective
     }

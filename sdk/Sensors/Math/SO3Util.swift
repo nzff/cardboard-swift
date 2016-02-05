@@ -119,9 +119,9 @@ func so3FromMu(w:Vector3d, inout result:Matrix3x3d)
         }
         else
         {
-            let invTheta:Double = 1.0 / theta;
-            kA = sin(theta) * invTheta;
-            kB = (1.0 - cos(theta)) * (invTheta * invTheta);
+            let invTheta:Double = 1.0 / theta
+            kA = sin(theta) * invTheta
+            kB = (1.0 - cos(theta)) * (invTheta * invTheta)
         }
     }
     
@@ -130,7 +130,7 @@ func so3FromMu(w:Vector3d, inout result:Matrix3x3d)
 
 func muFromSO3(so3:Matrix3x3d, inout result:Vector3d)
 {
-    let cosAngle = (so3.get(0, 0) + so3.get(1, 1) + so3.get(2, 2) - 1.0) * 0.5;
+    let cosAngle = (so3.get(0, 0) + so3.get(1, 1) + so3.get(2, 2) - 1.0) * 0.5
     
     result.set((so3.get(2, 1) - so3.get(1, 2)) / 2.0,
                (so3.get(0, 2) - so3.get(2, 0)) / 2.0,

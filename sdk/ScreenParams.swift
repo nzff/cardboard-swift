@@ -12,7 +12,7 @@ extension UIScreen
             return CGSizeMake(screenSize.height, screenSize.width)
         }
         
-        return screenSize;
+        return screenSize
     }
     
     func sizeFixedToPortrait() -> CGSize
@@ -36,6 +36,11 @@ class ScreenParams
     
     let correctIphoneViewport:Bool = true
     
+    let isPhone = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Phone
+    
+    let isRetina:Bool = UIScreen.mainScreen().scale == 2.0
+    
+    
     init()
     {
         
@@ -43,27 +48,40 @@ class ScreenParams
     
     init(screenParams: ScreenParams)
     {
-        self.scale = screenParams.scale;
-        self.xMetersPerPixel = screenParams.xMetersPerPixel;
-        self.yMetersPerPixel = screenParams.yMetersPerPixel;
-        self.borderSizeMeters = screenParams.borderSizeMeters;
+        self.scale = screenParams.scale
+        self.xMetersPerPixel = screenParams.xMetersPerPixel
+        self.yMetersPerPixel = screenParams.yMetersPerPixel
+        self.borderSizeMeters = screenParams.borderSizeMeters
     }
     
     init(deviceScreen:UIScreen)
     {
-        screen = deviceScreen;
+        let isIphone5:Bool = isPhone && (UIScreen.mainScreen().sizeFixedToPortrait().width == 375.0)
+        
+        screen = deviceScreen
         
         scale = deviceScreen.nativeScale
         
-        let screenPixelsPerInch:Float = pixelsPerInch(screen);
+        let screenPixelsPerInch:Float = pixelsPerInch(screen)
         
-        let metersPerInch:Float = 0.0254;
-        let defaultBorderSizeMeters:Float = 0.001;
+        let metersPerInch:Float = 0.0254
+        let defaultBorderSizeMeters:Float = 0.003
         
-        xMetersPerPixel = (metersPerInch / screenPixelsPerInch);
-        yMetersPerPixel = (metersPerInch / screenPixelsPerInch);
+        xMetersPerPixel = (metersPerInch / screenPixelsPerInch)
+        yMetersPerPixel = (metersPerInch / screenPixelsPerInch)
         
-        borderSizeMeters = defaultBorderSizeMeters;
+        borderSizeMeters = defaultBorderSizeMeters
+        
+        // todo: handle the other scenarios here
+        
+        if isIphone5
+        {
+            borderSizeMeters = 0.006
+        }
+        else
+        {
+            borderSizeMeters = 0.001
+        }
     }
 
     func width() -> Int
@@ -94,9 +112,10 @@ class ScreenParams
     func pixelsPerInch(deviceScreen:UIScreen) -> Float
     {
         // Default iPhone retina pixels per inch
-        let pixelsPerInch:Float = 163.0 * Float(scale);
-        //todo: the other things
-        return pixelsPerInch;
+        // todo: the other scenarios
+
+        let pixelsPerInch:Float = 163.0 * Float(scale)
+        
+        return pixelsPerInch
     }
-    
 }

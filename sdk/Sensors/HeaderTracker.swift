@@ -13,7 +13,7 @@ public class HeadTracker
     var correctedInertialReferenceFrameFromWorld:GLKMatrix4 = GLKMatrix4Identity
     var displayFromDevice:GLKMatrix4 = GLKMatrix4Identity
     
-    var trackingType:TrackingType = TrackingType.EKF
+    var trackingType:TrackingType = TrackingType.CoreMotion
     var tracker:OrientationEKF = OrientationEKF()
     
     var headingCorrectionComputed:Bool = false
@@ -21,7 +21,7 @@ public class HeadTracker
     var neckModelEnabled:Bool = false
     var neckModelTranslation:GLKMatrix4 = GLKMatrix4Identity
     var defaultNeckHorizontalOffset:Float = 0.08
-    var defaultNeckVerticalOffset:Float = 0.075;
+    var defaultNeckVerticalOffset:Float = 0.075
     
     var sampleCount:UInt = 0
     var initialSkipSamples:UInt = 10
@@ -42,7 +42,7 @@ public class HeadTracker
         
         displayFromDevice = GetRotateEulerMatrix(0.0, 0.0, -90.0)
         
-        neckModelTranslation = GLKMatrix4Translate(neckModelTranslation, 0, -defaultNeckVerticalOffset, defaultNeckHorizontalOffset);
+        neckModelTranslation = GLKMatrix4Translate(neckModelTranslation, 0, -defaultNeckVerticalOffset, defaultNeckHorizontalOffset)
     }
     
     func getLastHeadView() -> GLKMatrix4
@@ -51,12 +51,12 @@ public class HeadTracker
         
         if trackingType == .EKF || trackingType == .CoreMotionEKF
         {
-            let currentTimestamp = CACurrentMediaTime();
+            let currentTimestamp = CACurrentMediaTime()
             
-            let secondsSinceLastGyroEvent = currentTimestamp - lastGyroEventTimestamp;
+            let secondsSinceLastGyroEvent = currentTimestamp - lastGyroEventTimestamp
             let secondsToPredictForward = secondsSinceLastGyroEvent + 1.0 / 30.0
 
-            deviceFromInertialReferenceFrame = tracker.getPredictedGLMatrix(secondsToPredictForward) ///tracker.getPredictedGLMatrix(secondsToPredictForward)//tracker.getGlMatrix() // note: come back here
+            deviceFromInertialReferenceFrame = tracker.getPredictedGLMatrix(secondsToPredictForward)
         }
         
         if trackingType == .CoreMotion
@@ -107,17 +107,17 @@ public class HeadTracker
         }
         
         let deviceFromWorld = GLKMatrix4Multiply(deviceFromInertialReferenceFrame,
-                                                 correctedInertialReferenceFrameFromWorld);
+                                                 correctedInertialReferenceFrameFromWorld)
         
-        var displayFromWorld = GLKMatrix4Multiply(displayFromDevice, deviceFromWorld);
+        var displayFromWorld = GLKMatrix4Multiply(displayFromDevice, deviceFromWorld)
         
         if neckModelEnabled
         {
-            displayFromWorld = GLKMatrix4Multiply(neckModelTranslation, displayFromWorld);
-            displayFromWorld = GLKMatrix4Translate(displayFromWorld, 0.0, defaultNeckVerticalOffset, 0.0);
+            displayFromWorld = GLKMatrix4Multiply(neckModelTranslation, displayFromWorld)
+            displayFromWorld = GLKMatrix4Translate(displayFromWorld, 0.0, defaultNeckVerticalOffset, 0.0)
         }
         
-        lastHeadView = displayFromWorld;
+        lastHeadView = displayFromWorld
         
         return lastHeadView
     }
@@ -168,12 +168,12 @@ public class HeadTracker
                 
                 if self.sampleCount <= self.initialSkipSamples || accelerometerData == nil
                 {
-                    return;
+                    return
                 }
                 
                 let kG:Double = 9.81
 
-                let acceleration = accelerometerData!.acceleration;
+                let acceleration = accelerometerData!.acceleration
                 
                 let acc = GLKVector3Make(Float(kG * acceleration.x), Float(kG * acceleration.y), Float(kG * acceleration.z))
                 
@@ -190,13 +190,13 @@ public class HeadTracker
                         return;
                     }
                     
-                    let rotationRate = gyroData!.rotationRate;
+                    let rotationRate = gyroData!.rotationRate
                     
                     let rotVec = GLKVector3Make(Float(rotationRate.x), Float(rotationRate.y), Float(rotationRate.z))
                     
                     self.tracker.processGyro(rotVec, gyroData!.timestamp)
                     
-                    self.lastGyroEventTimestamp = gyroData!.timestamp;
+                    self.lastGyroEventTimestamp = gyroData!.timestamp
             })
 
         }
@@ -217,7 +217,7 @@ public class HeadTracker
                     return
                 }
 
-                let kG:Double = 9.81;
+                let kG:Double = 9.81
                 
                 let timestamp = deviceMotion!.timestamp
                 
@@ -336,7 +336,7 @@ public class HeadTracker
         glRotationMatrix.m.14 = 0.0
         glRotationMatrix.m.15 = 1.0
     
-        return glRotationMatrix;
+        return glRotationMatrix
     }
     
     

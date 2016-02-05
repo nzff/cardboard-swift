@@ -148,7 +148,7 @@ class OrientationEKF
 
         Matrix3x3d.mult(so3PredictedMotion, so3SensorFromWorld, result:&so3PredictedState)
         
-        return glMatrixFromSo3(so3PredictedState);
+        return glMatrixFromSo3(so3PredictedState)
     }
     
     func processGyro(gyro:GLKVector3, _ sensorTimeStamp:Double)
@@ -166,11 +166,11 @@ class OrientationEKF
             
             if dT > 0.04
             {
-                dT = gyroFilterValid ? filteredGyroTimestep : 0.01;
+                dT = gyroFilterValid ? filteredGyroTimestep : 0.01
             }
             else
             {
-                filterGyroTimestep(dT);
+                filterGyroTimestep(dT)
             }
             
             vU.set(Double(gyro.x) * -dT, Double(gyro.y) * -dT, Double(gyro.z) * -dT)
@@ -332,7 +332,7 @@ class OrientationEKF
     {
         // Surely there's a better way to do this...
         
-        var rotationMatrix = GLKMatrix4();
+        var rotationMatrix = GLKMatrix4()
 
         rotationMatrix.m.0  = Float(so3.get(0,0))
         rotationMatrix.m.1  = Float(so3.get(1,0))

@@ -468,7 +468,7 @@ class DistortionRenderer
         glState.addTrackedVertexAttribute(GLuint(holder.positionLocation))
         
         holder.vignetteLocation = glGetAttribLocation(GLuint(holder.program), "aVignette")
-        GLCheckForError();
+        GLCheckForError()
         if holder.vignetteLocation == -1
         {
             print("DistortionRenderer:" + "Could not get attrib location for aVignette")
@@ -491,7 +491,7 @@ class DistortionRenderer
             
             //green
             holder.greenTextureCoordLocation = glGetAttribLocation(GLuint(holder.program), "aGreenTextureCoord")
-            GLCheckForError();
+            GLCheckForError()
             if holder.greenTextureCoordLocation == -1
             {
                 print("DistortionRenderer:" + "Could not get attrib location for aGreenTextureCoord")
@@ -656,7 +656,7 @@ class DistortionRenderer
                     vertexData[(vertexOffset + 7)] = uTextureBlue
                     vertexData[(vertexOffset + 8)] = vTextureBlue
                     
-                    vertexOffset += 9;
+                    vertexOffset += 9
                 }
             }
             

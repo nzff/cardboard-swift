@@ -61,33 +61,33 @@ class HeadTransform
         else
         {
             s = sqrtf(1.0 + headView.m.10 - headView.m.0 - headView.m.5)
-            z = s * 0.5;
-            s = 0.5 / s;
-            x = (headView.m.2 + headView.m.8) * s;
-            y = (headView.m.9 + headView.m.6) * s;
-            w = (headView.m.4 - headView.m.1) * s;
+            z = s * 0.5
+            s = 0.5 / s
+            x = (headView.m.2 + headView.m.8) * s
+            y = (headView.m.9 + headView.m.6) * s
+            w = (headView.m.4 - headView.m.1) * s
         }
         
-        return GLKQuaternionMake(x, y, z, w);
+        return GLKQuaternionMake(x, y, z, w)
     }
     
     func eulerAngles() -> GLKVector3
     {
-        var yaw:Float = 0;
-        var roll:Float = 0;
-        let pitch:Float = asinf(headView.m.6);
+        var yaw:Float = 0
+        var roll:Float = 0
+        let pitch:Float = asinf(headView.m.6)
         
         if (sqrtf(1.0 - headView.m.6 * headView.m.6) >= 0.01)
         {
-            yaw = atan2f(-headView.m.2, headView.m.10);
-            roll = atan2f(-headView.m.4, headView.m.5);
+            yaw = atan2f(-headView.m.2, headView.m.10)
+            roll = atan2f(-headView.m.4, headView.m.5)
         }
         else
         {
-            yaw = 0.0;
-            roll = atan2f(headView.m.1, headView.m.0);
+            yaw = 0.0
+            roll = atan2f(headView.m.1, headView.m.0)
         }
-        return GLKVector3Make(-pitch, -yaw, -roll);
+        return GLKVector3Make(-pitch, -yaw, -roll)
     }
     
 }

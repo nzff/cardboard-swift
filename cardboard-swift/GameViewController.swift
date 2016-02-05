@@ -40,8 +40,8 @@ class GameViewController: CSViewController, CSStereoRendererDelegate
         glGenVertexArraysOES(1, &vertexArray)
         glBindVertexArrayOES(vertexArray)
         
-        cubePositionLocation = glGetAttribLocation(program, "position");
-        cubeNormalLocation = glGetAttribLocation(program, "normal");
+        cubePositionLocation = glGetAttribLocation(program, "position")
+        cubeNormalLocation = glGetAttribLocation(program, "normal")
         
         glGenBuffers(1, &vertexBuffer)
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
@@ -99,9 +99,8 @@ class GameViewController: CSViewController, CSStereoRendererDelegate
         
         glDrawArrays(GLenum(GL_TRIANGLES), 0, 36)
         
-        glBindVertexArrayOES(0);
-        glUseProgram(0);
-        
+        glBindVertexArrayOES(0)
+        glUseProgram(0)
     }
     
     func shutdownRendererWithView(view:GLKView)

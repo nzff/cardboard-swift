@@ -69,17 +69,17 @@ class Matrix3x3d
            _ m10:Double, _ m11:Double, _ m12:Double,
            _ m20:Double, _ m21:Double, _ m22:Double)
     {
-        m[0] = m00;
-        m[1] = m01;
-        m[2] = m02;
+        m[0] = m00
+        m[1] = m01
+        m[2] = m02
         
-        m[3] = m10;
-        m[4] = m11;
-        m[5] = m12;
+        m[3] = m10
+        m[4] = m11
+        m[5] = m12
         
-        m[6] = m20;
-        m[7] = m21;
-        m[8] = m22;
+        m[6] = m20
+        m[7] = m21
+        m[8] = m22
     }
     
     func minusEquals(input:Matrix3x3d)
@@ -143,27 +143,27 @@ class Matrix3x3d
     
     func transpose(inout result:Matrix3x3d)
     {
-        result.m[0] = m[0];
-        result.m[1] = m[3];
-        result.m[2] = m[6];
-        result.m[3] = m[1];
-        result.m[4] = m[4];
-        result.m[5] = m[7];
-        result.m[6] = m[2];
-        result.m[7] = m[5];
-        result.m[8] = m[8];
+        result.m[0] = m[0]
+        result.m[1] = m[3]
+        result.m[2] = m[6]
+        result.m[3] = m[1]
+        result.m[4] = m[4]
+        result.m[5] = m[7]
+        result.m[6] = m[2]
+        result.m[7] = m[5]
+        result.m[8] = m[8]
     }
     
     func invert(inout result:Matrix3x3d) -> Bool
     {
-        let d = determinant();
+        let d = determinant()
         
         if (d == 0.0)
         {
             return false;
         }
         
-        let invdet = 1.0 / d;
+        let invdet = 1.0 / d
         
         result.set( (m[4] * m[8] - m[7] * m[5]) * invdet,
                    -(m[1] * m[8] - m[2] * m[7]) * invdet,
@@ -173,9 +173,9 @@ class Matrix3x3d
                    -(m[0] * m[5] - m[3] * m[2]) * invdet,
                     (m[3] * m[7] - m[6] * m[4]) * invdet,
                    -(m[0] * m[7] - m[6] * m[1]) * invdet,
-                    (m[0] * m[4] - m[3] * m[1]) * invdet);
+                    (m[0] * m[4] - m[3] * m[1]) * invdet)
         
-        return true;
+        return true
     }
     
     func toString() -> String
