@@ -39,7 +39,7 @@ class FieldOfView
         let leftFov = -tanf(GLKMathDegreesToRadians(left)) * near
         let rightFov = -tanf(GLKMathDegreesToRadians(right)) * near
         let bottomFov = -tanf(GLKMathDegreesToRadians(bottom)) * near
-        let topFov = -tanf(GLKMathDegreesToRadians(top)) * near
+        let topFov = tanf(GLKMathDegreesToRadians(top)) * near
 
         let frustrum = GLKMatrix4MakeFrustum(leftFov, rightFov, bottomFov, topFov, near, far)
         

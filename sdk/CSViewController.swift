@@ -279,10 +279,10 @@ class CSViewController : GLKViewController
         leftEye.fov.bottom = min(bottomAngle, maxLeftEyeFOV.bottom)
         leftEye.fov.top = min(topAngle, maxLeftEyeFOV.top)
         
-        rightEye.fov.left = min(outerAngle, maxLeftEyeFOV.right)
-        rightEye.fov.right = min(innerAngle, maxLeftEyeFOV.left)
-        rightEye.fov.bottom = min(bottomAngle, maxLeftEyeFOV.bottom)
-        rightEye.fov.top = min(topAngle, maxLeftEyeFOV.top)
+        rightEye.fov.left = leftEye.fov.right
+        rightEye.fov.right = leftEye.fov.left
+        rightEye.fov.bottom = leftEye.fov.bottom
+        rightEye.fov.top = leftEye.fov.top
     }
     
     func updateUndistortedFOVAndViewport()
