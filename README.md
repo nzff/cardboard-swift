@@ -14,7 +14,7 @@ The entire project was written in 1 day, and a programmer's best friend -- copy/
 
 ### "... this looks like a C++ programmer writing Swift..."
 
-Indeed! This was written primarily an exercise to learni Swift. I'd love to learn how to make it more idiomatic (Swift-y? Swift-onic? Swift-arific?) either via pull-requests or direct email.
+Indeed! This was written primarily an exercise to learn Swift. I'd love to learn how to make it more idiomatic (Swift-y? Swift-onic? Swift-arific?) either via pull-requests or direct email.
 
 
 ## Why and what's the point?
